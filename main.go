@@ -79,7 +79,7 @@ func main() {
 	for _, projectEntry := range responseBody.ProjectEnties {
 		for _, timeEntry := range projectEntry.TimeEntries {
 			time := strconv.FormatFloat(float64(timeEntry.Time)/3600000, 'f', 6, 64)
-			data = append(data, []string{config.UserName, projectEntry.Title.Project, timeEntry.Title.Name, time})
+			data = append(data, []string{config.UserName, projectEntry.Title.Project, "Production", timeEntry.Title.Name, time})
 		}
 	}
 
