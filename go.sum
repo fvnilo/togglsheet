@@ -1,0 +1,7 @@
+github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
+github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
+golang.org/x/net v0.0.0-20181011144130-49bb7cea24b1/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
+golang.org/x/net v0.0.0-20181217023233-e147a9138326 h1:iCzOf0xz39Tstp+Tu/WwyGjUXCk34QhQORRxBeXXTA4=
+golang.org/x/net v0.0.0-20181217023233-e147a9138326/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
+gopkg.in/resty.v1 v1.10.3 h1:w8FjChB7PWrvE5z6JX/gfFzVwTDj38qiAQJKgdWDGvA=
+gopkg.in/resty.v1 v1.10.3/go.mod h1:nrgQYbPhkRfn2BfT32NNTLfq3K9NuHRB0MsAcA9weWY=
