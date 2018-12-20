@@ -10,3 +10,4 @@
 - [ ] Create a cmd that will tell the person what is their workspace id
 - [ ] Better doc
 - [ ] Create first release with documentation
+- [ ] Do a mapping for the timesheet?
