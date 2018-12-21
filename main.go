@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"math"
 	"os"
 	"strconv"
 
@@ -35,7 +36,6 @@ type ProjectEntry struct {
 
 type Response struct {
 	ProjectEnties []*ProjectEntry `json:"data"`
-	Total         float64         `json:"total_grand"`
 }
 
 type Config struct {
@@ -75,11 +75,19 @@ func main() {
 	}
 
 	data := make([][]string, 0)
+	var total float64
 
 	for _, projectEntry := range responseBody.ProjectEnties {
 		for _, timeEntry := range projectEntry.TimeEntries {
-			time := strconv.FormatFloat(float64(timeEntry.Time)/3600000, 'f', 6, 64)
-			data = append(data, []string{config.UserName, projectEntry.Title.Project, "Production", timeEntry.Title.Name, time})
+			hours := float64(timeEntry.Time) / 3600000
+			roundedHours := math.Round(hours*4) / 4
+
+			if roundedHours == 0 {
+				roundedHours = 0.25
+			}
+
+			total += roundedHours
+			data = append(data, []string{config.UserName, projectEntry.Title.Project, "Production", timeEntry.Title.Name, strconv.FormatFloat(roundedHours, 'f', 2, 64)})
 		}
 	}
 
@@ -95,5 +103,5 @@ func main() {
 		log.Fatalln("error writing csv:", err)
 	}
 
-	fmt.Printf("Total time: %vh\n", responseBody.Total/3600000)
+	fmt.Printf("Total time: %vh\n", total)
 }
