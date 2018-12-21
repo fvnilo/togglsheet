@@ -6,6 +6,7 @@
 # Todos
 
 - [ ] Better structure
+- [ ] Remove resty. I do not really need it.
 - [ ] Tests
 - [ ] Create a cmd that will tell the person what is their workspace id
 - [ ] Create Makefile
