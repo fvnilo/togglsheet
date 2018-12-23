@@ -5,13 +5,14 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"math"
+	"net/http"
 	"os"
 	"strconv"
 
 	"github.com/BurntSushi/toml"
-	resty "gopkg.in/resty.v1"
 )
 
 const userAgent = "toggl-export"
@@ -36,6 +37,7 @@ type ProjectEntry struct {
 
 type Response struct {
 	ProjectEnties []*ProjectEntry `json:"data"`
+	// Total float64 `json:"total_grand"`
 }
 
 type Config struct {
@@ -55,23 +57,34 @@ func main() {
 		panic(err)
 	}
 
-	resp, _ := resty.
-		R().
-		SetHeader("Accept", "application/json").
-		SetBasicAuth(config.ApiToken, "api_token").
-		SetQueryParams(map[string]string{
-			"workspace_id": config.WorkspaceID,
-			"since":        *startDate,
-			"until":        *endDate,
-			"user_agent":   userAgent,
-		}).
-		Get("https://toggl.com/reports/api/v2/summary")
+	client := &http.Client{}
+	req, _ := http.NewRequest("GET", "https://toggl.com/reports/api/v2/summary", nil)
+	req.Header.Add("Accept", "application/json")
+	req.SetBasicAuth(config.ApiToken, "api_token")
+	q := req.URL.Query()
 
-	var responseBody Response
-	err := json.Unmarshal(resp.Body(), &responseBody)
+	q.Add("workspace_id", config.WorkspaceID)
+	q.Add("since", *startDate)
+	q.Add("until", *endDate)
+	q.Add("user_agent", userAgent)
+
+	req.URL.RawQuery = q.Encode()
+	res, err := client.Do(req)
 
 	if err != nil {
 		panic(err)
+	}
+	defer res.Body.Close()
+
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		panic(err)
+	}
+
+	responseBody := Response{}
+	jsonErr := json.Unmarshal(body, &responseBody)
+	if jsonErr != nil {
+		panic(jsonErr)
 	}
 
 	data := make([][]string, 0)
