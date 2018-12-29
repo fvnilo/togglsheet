@@ -61,7 +61,7 @@ func (t *TimesheetAPI) buildRequest(start, end string) (*http.Request, error) {
 	}
 
 	req.Header.Add("Accept", "application/json")
-	req.SetBasicAuth(t.config.ApiToken, "api_token")
+	req.SetBasicAuth(t.config.APIToken, "api_token")
 	q := req.URL.Query()
 
 	q.Add("workspace_id", t.config.WorkspaceID)

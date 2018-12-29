@@ -13,7 +13,7 @@ import (
 )
 
 var config = &toggl_export.Config{
-	ApiToken:    "api_token",
+	APIToken:    "api_token",
 	WorkspaceID: "workspace_id",
 	UserName:    "user_name",
 }

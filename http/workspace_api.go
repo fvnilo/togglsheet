@@ -70,7 +70,7 @@ func (t *WorkspaceAPI) buildRequest() (*http.Request, error) {
 	}
 
 	req.Header.Add("Accept", "application/json")
-	req.SetBasicAuth(t.config.ApiToken, "api_token")
+	req.SetBasicAuth(t.config.APIToken, "api_token")
 
 	return req, nil
 }
