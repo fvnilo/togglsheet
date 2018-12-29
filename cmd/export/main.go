@@ -33,7 +33,7 @@ func main() {
 	}
 
 	csvData := export.ProcessTimesheet(timesheet, config.UserName)
-	fileName, err := export.ExportCSV(csvData)
+	fileName, err := export.CSV(csvData)
 
 	if err != nil {
 		log.Fatalf("Could not export file: %v", err)

@@ -28,13 +28,13 @@ func TestGetTimeSheet_ValidTimeSheet(t *testing.T) {
 		t.Errorf("Got an error while getting the timesheet: %v", err)
 	}
 
-	if len(timesheet.ProjectEnties) == 0 {
+	if len(timesheet.ProjectEntries) == 0 {
 		t.Error("Didn't get any timesheet project entries")
 	}
 
-	timeEntryTime := timesheet.ProjectEnties[0].TimeEntries[0].Time
+	timeEntryTime := timesheet.ProjectEntries[0].TimeEntries[0].Time
 
-	if timesheet.ProjectEnties[0].TimeEntries[0].Time != 3600000 {
+	if timesheet.ProjectEntries[0].TimeEntries[0].Time != 3600000 {
 		t.Errorf("Expected a time entry of %v but got %v", 3600000, timeEntryTime)
 	}
 }
@@ -49,7 +49,7 @@ func TestGetTimeSheet_EmptyTimeSheet(t *testing.T) {
 		t.Errorf("Got an error while getting the timesheet: %v", err)
 	}
 
-	if len(timesheet.ProjectEnties) != 0 {
+	if len(timesheet.ProjectEntries) != 0 {
 		t.Error("Didn't get an empty timesheet")
 	}
 }

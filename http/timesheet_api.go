@@ -9,21 +9,22 @@ import (
 	toggl_export "github.com/nylo-andry/toggl-export"
 )
 
+const timeSheetURL = "reports/api/v2/summary"
+const userAgent = "toggl-export"
+
+// TimesheetAPI is the client to the summary reports endpoint of Toggl.
 type TimesheetAPI struct {
 	baseURL    string
 	config     *toggl_export.Config
 	httpClient *http.Client
 }
 
-var _ toggl_export.TogglService = &TimesheetAPI{}
-
-const url = "reports/api/v2/summary"
-const userAgent = "toggl-export"
-
+// NewTimesheetAPI returns a new instance of the TimesheetAPI.
 func NewTimesheetAPI(baseURL string, config *toggl_export.Config, httpClient *http.Client) *TimesheetAPI {
 	return &TimesheetAPI{baseURL, config, httpClient}
 }
 
+// GetTimeSheet returns the timesheet data from Toggl.
 func (t *TimesheetAPI) GetTimeSheet(start, end string) (*toggl_export.Timesheet, error) {
 	req, err := t.buildRequest(start, end)
 
@@ -53,7 +54,7 @@ func (t *TimesheetAPI) GetTimeSheet(start, end string) (*toggl_export.Timesheet,
 }
 
 func (t *TimesheetAPI) buildRequest(start, end string) (*http.Request, error) {
-	req, err := http.NewRequest("GET", fmt.Sprintf("%v/%v", t.baseURL, url), nil)
+	req, err := http.NewRequest("GET", fmt.Sprintf("%v/%v", t.baseURL, timeSheetURL), nil)
 
 	if err != nil {
 		return nil, err

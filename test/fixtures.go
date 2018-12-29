@@ -2,10 +2,25 @@ package test
 
 import toggl_export "github.com/nylo-andry/toggl-export"
 
-var TimeEntryTitle = &toggl_export.TimeEntryTitle{"test time entry"}
-var TimeEntry = &toggl_export.TimeEntry{TimeEntryTitle, 3600000.0}
-var ProjectTitle = &toggl_export.ProjectTitle{"project time entry"}
-var ValidProjectEntry = &toggl_export.ProjectEntry{ProjectTitle, []*toggl_export.TimeEntry{TimeEntry}}
+var timeEntryTitle = &toggl_export.TimeEntryTitle{
+	Name: "test time entry",
+}
+
+var timeEntry = &toggl_export.TimeEntry{
+	Title: timeEntryTitle,
+	Time:  3600000.0,
+}
+
+var projectTitle = &toggl_export.ProjectTitle{
+	Project: "project time entry",
+}
+
+var validProjectEntry = &toggl_export.ProjectEntry{
+	Title:       projectTitle,
+	TimeEntries: []*toggl_export.TimeEntry{timeEntry},
+}
+
+// ValidTimesheet represents a minimal valid timesheet entry
 var ValidTimesheet = &toggl_export.Timesheet{
-	[]*toggl_export.ProjectEntry{ValidProjectEntry},
+	ProjectEntries: []*toggl_export.ProjectEntry{validProjectEntry},
 }

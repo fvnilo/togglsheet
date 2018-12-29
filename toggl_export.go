@@ -19,19 +19,16 @@ type ProjectEntry struct {
 }
 
 type Timesheet struct {
-	ProjectEnties []*ProjectEntry `json:"data"`
+	ProjectEntries []*ProjectEntry `json:"data"`
+}
+
+type Workspace struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
 }
 
 type Config struct {
 	ApiToken    string `toml:"api_token"`
 	WorkspaceID string `toml:"workspace_id"`
 	UserName    string `toml:"user_name"`
-}
-
-type TogglService interface {
-	GetTimeSheet(start, end string) (*Timesheet, error)
-}
-
-type TimesheetExporter interface {
-	Export(timesheet Timesheet) (string, error)
 }
