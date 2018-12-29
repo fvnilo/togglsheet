@@ -5,9 +5,9 @@
 
 # Todos
 
-- [ ] Better structure
+- [x] Better structure
 - [x] Remove resty. I do not really need it.
-- [ ] Tests
+- [x] Tests
 - [ ] Create a cmd that will tell the person what is their workspace id
 - [ ] Create Makefile
 - [ ] Better doc

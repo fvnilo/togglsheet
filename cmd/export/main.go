@@ -1,16 +1,13 @@
 package main
 
 import (
-	"encoding/csv"
 	"flag"
 	"fmt"
 	"log"
-	"math"
 	"net/http"
-	"os"
-	"strconv"
 
 	"github.com/nylo-andry/toggl-export/config"
+	"github.com/nylo-andry/toggl-export/export"
 	api "github.com/nylo-andry/toggl-export/http"
 )
 
@@ -35,34 +32,12 @@ func main() {
 		log.Fatalf("Could not get timesheet data: %v", err)
 	}
 
-	data := make([][]string, 0)
-	var total float64
+	csvData := export.ProcessTimesheet(timesheet, config.UserName)
+	fileName, err := export.ExportCSV(csvData)
 
-	for _, projectEntry := range timesheet.ProjectEnties {
-		for _, timeEntry := range projectEntry.TimeEntries {
-			hours := float64(timeEntry.Time) / 3600000
-			roundedHours := math.Round(hours*4) / 4
-
-			if roundedHours == 0 {
-				roundedHours = 0.25
-			}
-
-			total += roundedHours
-			data = append(data, []string{config.UserName, projectEntry.Title.Project, "Production", timeEntry.Title.Name, strconv.FormatFloat(roundedHours, 'f', 2, 64)})
-		}
-	}
-
-	file, err := os.Create("result.csv")
 	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
-	w := csv.NewWriter(file)
-	w.WriteAll(data)
-
-	if err := w.Error(); err != nil {
-		log.Fatalln("error writing csv:", err)
+		log.Fatalf("Could not export file: %v", err)
 	}
 
-	fmt.Printf("Total time: %vh\n", total)
+	fmt.Printf("Exported timesheet at: %v\n", fileName)
 }

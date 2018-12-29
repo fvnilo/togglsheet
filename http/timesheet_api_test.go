@@ -9,6 +9,7 @@ import (
 
 	toggl_export "github.com/nylo-andry/toggl-export"
 	api "github.com/nylo-andry/toggl-export/http"
+	"github.com/nylo-andry/toggl-export/test"
 )
 
 var config = &toggl_export.Config{
@@ -18,7 +19,7 @@ var config = &toggl_export.Config{
 }
 
 func TestGetTimeSheet_ValidTimeSheet(t *testing.T) {
-	server := newTestServer(validTimesheet)
+	server := newTestServer(test.ValidTimesheet)
 
 	timesheetApi := api.NewTimesheetAPI(server.URL, config, server.Client())
 	timesheet, err := timesheetApi.GetTimeSheet("", "")
@@ -33,8 +34,8 @@ func TestGetTimeSheet_ValidTimeSheet(t *testing.T) {
 
 	timeEntryTime := timesheet.ProjectEnties[0].TimeEntries[0].Time
 
-	if timesheet.ProjectEnties[0].TimeEntries[0].Time != 1.0 {
-		t.Errorf("Expected a time entry of %v but got %v", 1.0, timeEntryTime)
+	if timesheet.ProjectEnties[0].TimeEntries[0].Time != 3600000 {
+		t.Errorf("Expected a time entry of %v but got %v", 3600000, timeEntryTime)
 	}
 }
 
