@@ -1,6 +1,6 @@
-# Toggl Export
+# Togglsheet
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/nylo-andry/toggl-export)](https://goreportcard.com/report/github.com/nylo-andry/toggl-export)
+[![Go Report Card](https://goreportcard.com/badge/github.com/nylo-andry/togglsheet)](https://goreportcard.com/report/github.com/nylo-andry/togglsheet)
 
 > A simple command-line tool that exports your toggl timesheet to CSV
 

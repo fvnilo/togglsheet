@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/nylo-andry/toggl-export/config"
-	api "github.com/nylo-andry/toggl-export/http"
+	"github.com/nylo-andry/togglsheet/config"
+	"github.com/nylo-andry/togglsheet/httpclient"
 )
 
 func main() {
@@ -17,7 +17,7 @@ func main() {
 	}
 
 	client := &http.Client{}
-	workspaceAPI := api.NewWorkspaceAPI("https://toggl.com", config, client)
+	workspaceAPI := httpclient.NewWorkspaceAPI("https://toggl.com", config, client)
 	w, err := workspaceAPI.GetWorkspaces()
 
 	if err != nil {

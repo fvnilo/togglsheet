@@ -1,4 +1,4 @@
-package http_test
+package httpclient_test
 
 import (
 	"encoding/json"
@@ -7,12 +7,12 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	toggl_export "github.com/nylo-andry/toggl-export"
-	api "github.com/nylo-andry/toggl-export/http"
-	"github.com/nylo-andry/toggl-export/test"
+	"github.com/nylo-andry/togglsheet"
+	"github.com/nylo-andry/togglsheet/httpclient"
+	"github.com/nylo-andry/togglsheet/internal/pkg/test"
 )
 
-var config = &toggl_export.Config{
+var config = &togglsheet.Config{
 	APIToken:    "api_token",
 	WorkspaceID: "workspace_id",
 	UserName:    "user_name",
@@ -21,7 +21,7 @@ var config = &toggl_export.Config{
 func TestGetTimeSheet_ValidTimeSheet(t *testing.T) {
 	server := newTestServer(test.ValidTimesheet)
 
-	timesheetApi := api.NewTimesheetAPI(server.URL, config, server.Client())
+	timesheetApi := httpclient.NewTimesheetAPI(server.URL, config, server.Client())
 	timesheet, err := timesheetApi.GetTimeSheet("", "")
 
 	if err != nil {
@@ -40,9 +40,9 @@ func TestGetTimeSheet_ValidTimeSheet(t *testing.T) {
 }
 
 func TestGetTimeSheet_EmptyTimeSheet(t *testing.T) {
-	server := newTestServer(&toggl_export.Timesheet{})
+	server := newTestServer(&togglsheet.Timesheet{})
 
-	timesheetApi := api.NewTimesheetAPI(server.URL, config, server.Client())
+	timesheetApi := httpclient.NewTimesheetAPI(server.URL, config, server.Client())
 	timesheet, err := timesheetApi.GetTimeSheet("", "")
 
 	if err != nil {
@@ -54,7 +54,7 @@ func TestGetTimeSheet_EmptyTimeSheet(t *testing.T) {
 	}
 }
 
-func newTestServer(data *toggl_export.Timesheet) *httptest.Server {
+func newTestServer(data *togglsheet.Timesheet) *httptest.Server {
 	b, _ := json.Marshal(data)
 
 	fmt.Println(data)

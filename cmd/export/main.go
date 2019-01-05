@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/nylo-andry/toggl-export/config"
-	"github.com/nylo-andry/toggl-export/export"
-	api "github.com/nylo-andry/toggl-export/http"
+	"github.com/nylo-andry/togglsheet/config"
+	"github.com/nylo-andry/togglsheet/export"
+	"github.com/nylo-andry/togglsheet/httpclient"
 )
 
 func main() {
@@ -24,7 +24,7 @@ func main() {
 	}
 
 	client := &http.Client{}
-	timesheetAPI := api.NewTimesheetAPI("https://toggl.com", config, client)
+	timesheetAPI := httpclient.NewTimesheetAPI("https://toggl.com", config, client)
 
 	timesheet, err := timesheetAPI.GetTimeSheet(*startDate, *endDate)
 

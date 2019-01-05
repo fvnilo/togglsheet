@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/nylo-andry/toggl-export/export"
+	"github.com/nylo-andry/togglsheet/export"
 )
 
 var timeValuesTest = []struct {
