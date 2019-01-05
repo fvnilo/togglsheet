@@ -3,14 +3,14 @@ package export
 import (
 	"strconv"
 
-	toggl_export "github.com/nylo-andry/toggl-export"
+	"github.com/nylo-andry/togglsheet"
 )
 
 // CSVData represents the data of the timesheet in CSV.
 type CSVData [][]string
 
 // ProcessTimesheet converts timesheet data (from Toggl) to a CSV format
-func ProcessTimesheet(timesheet *toggl_export.Timesheet, username string) CSVData {
+func ProcessTimesheet(timesheet *togglsheet.Timesheet, username string) CSVData {
 	data := make([][]string, 0)
 
 	for _, projectEntry := range timesheet.ProjectEntries {

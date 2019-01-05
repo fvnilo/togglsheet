@@ -1,4 +1,4 @@
-package http
+package httpclient
 
 import (
 	"encoding/json"
@@ -6,21 +6,21 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	toggl_export "github.com/nylo-andry/toggl-export"
+	"github.com/nylo-andry/togglsheet"
 )
 
 const workspaceURL = "api/v8/workspaces"
 
 // WorkspaceAPI is the client to the workspaces endpoint of Toggl.
 type WorkspaceAPI struct {
-	baseURL    string
-	config     *toggl_export.Config
-	httpClient *http.Client
+	baseURL string
+	config  *togglsheet.Config
+	client  *http.Client
 }
 
 // WorkspaceResponse represents what is returned by the workspace endpoint.
 type WorkspaceResponse struct {
-	Workspaces []toggl_export.Workspace
+	Workspaces []togglsheet.Workspace
 }
 
 // UnmarshalJSON instructs how to read JSON data.
@@ -29,8 +29,8 @@ func (w *WorkspaceResponse) UnmarshalJSON(bs []byte) error {
 }
 
 // NewWorkspaceAPI returns a new instance of the WorkspaceAPI
-func NewWorkspaceAPI(baseURL string, config *toggl_export.Config, httpClient *http.Client) *WorkspaceAPI {
-	return &WorkspaceAPI{baseURL, config, httpClient}
+func NewWorkspaceAPI(baseURL string, config *togglsheet.Config, client *http.Client) *WorkspaceAPI {
+	return &WorkspaceAPI{baseURL, config, client}
 }
 
 // GetWorkspaces returns the workspaces that can be exported.
@@ -41,7 +41,7 @@ func (t *WorkspaceAPI) GetWorkspaces() (*WorkspaceResponse, error) {
 		return nil, err
 	}
 
-	res, err := t.httpClient.Do(req)
+	res, err := t.client.Do(req)
 
 	if err != nil {
 		return nil, err

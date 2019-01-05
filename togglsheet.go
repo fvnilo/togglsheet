@@ -1,4 +1,4 @@
-package toggl_export
+package togglsheet
 
 // ProjectTitle represents a project title
 type ProjectTitle struct {

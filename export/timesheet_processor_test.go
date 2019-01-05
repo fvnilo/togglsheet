@@ -1,8 +1,8 @@
 package export_test
 
 import "testing"
-import "github.com/nylo-andry/toggl-export/export"
-import "github.com/nylo-andry/toggl-export/test"
+import "github.com/nylo-andry/togglsheet/export"
+import "github.com/nylo-andry/togglsheet/internal/pkg/test"
 
 func TestProcessTimesheet(t *testing.T) {
 	data := export.ProcessTimesheet(test.ValidTimesheet, "test")
