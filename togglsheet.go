@@ -35,7 +35,7 @@ type Workspace struct {
 
 // Config represents the application configuration
 type Config struct {
-	APIToken    string `toml:"api_token"`
-	WorkspaceID string `toml:"workspace_id"`
-	UserName    string `toml:"user_name"`
+	APIToken    string
+	WorkspaceID string
+	UserName    string
 }

@@ -6,8 +6,9 @@
 
 ## Getting started
 
-1. Create a `config.toml` file by copying/renaming the `example.config.toml`.
+1. Create a `.togglsheet` file by copying/renaming the `togglsheet.example`.
 
+    - Move that file to your home directory.
     - Fill in three values (`api_token`, `workspace_id`, `user_name`).
     - You can find your API token in your [Profile settings](https://toggl.com/app/profile)
     - If you do not know your `workspace_id`, you can find it by running the `workspace` command-line executable. You will still need to provide your API Token in your configuration file before you can find it.

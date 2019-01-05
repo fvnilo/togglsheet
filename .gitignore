@@ -24,6 +24,5 @@
 
 # Specific to app
 *.csv
-config.toml
 /build/
 release.zip
