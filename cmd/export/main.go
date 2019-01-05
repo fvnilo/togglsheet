@@ -17,7 +17,7 @@ func main() {
 
 	flag.Parse()
 
-	config, err := config.ReadConfig("config.toml")
+	config, err := config.LoadConfig()
 
 	if err != nil {
 		log.Fatalf("Could not read config: %v", err)
