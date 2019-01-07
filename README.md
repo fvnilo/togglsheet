@@ -4,6 +4,10 @@
 
 > A simple command-line tool that exports your toggl timesheet to CSV
 
+## Installation
+
+`go install github.com/nylo-andry/togglsheet/cmd/togglsheet`
+
 ## Getting started
 
 1. Create a `.togglsheet` file by copying/renaming the `togglsheet.example`.
